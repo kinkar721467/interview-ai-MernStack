@@ -48,10 +48,12 @@ async function authRegisterController(req,res) {
     );
 
     /* store the token in cookie */
+    const isProduction = process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
 
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
         maxAge: 24 * 60 * 60 * 1000 // 1 day in ms
     });
 
@@ -107,9 +109,12 @@ async function authLoginController(req,res) {
         {expiresIn: "1d"}
     );
 
+    const isProduction = process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
+
     res.cookie("token", token, {
         httpOnly: true,
-        sameSite: "lax",
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction,
         maxAge: 24 * 60 * 60 * 1000 // 1 day in ms
     });
 
@@ -133,11 +138,17 @@ async function authLoginController(req,res) {
 async function authLogoutController(req,res) {
     const token = req.cookies.token;
 
+    const isProduction = process.env.NODE_ENV === "production" || process.env.VERCEL === "1";
+
     if(token) {
         await blacklistModel.create({ token });
     }
 
-    res.clearCookie("token");
+    res.clearCookie("token", {
+        httpOnly: true,
+        sameSite: isProduction ? "none" : "lax",
+        secure: isProduction
+    });
 
     res.status(200).json({
         message: "User logout sucessfully"
