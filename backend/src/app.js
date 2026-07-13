@@ -14,6 +14,11 @@ app.use(cors({
 }));
 
 
+/* Root health check endpoint */
+app.get("/", (req, res) => {
+    res.json({ message: "Interview AI Backend is running successfully!" });
+});
+
 /* authRouter for all authentication related routes */
 app.use("/api/auth",authRouter);
 
