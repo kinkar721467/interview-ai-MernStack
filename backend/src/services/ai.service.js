@@ -1,4 +1,4 @@
-﻿const Groq = require("groq-sdk");
+const Groq = require("groq-sdk");
 const puppeteer = require("puppeteer");
 
 const groq = new Groq({
@@ -122,7 +122,7 @@ function buildResumeHtml(data) {
     esc(String(url).replace(pattern, ""));
 
   const shortLinkedin = (u) => short(u, /^https?:\/\/(www\.)?linkedin\.com\/in\//i);
-  const shortGithub   = (u) => short(u, /^https?:\/\/(www\.)?github\.com\//i);
+  const shortGithub = (u) => short(u, /^https?:\/\/(www\.)?github\.com\//i);
 
   // Bulleted list (accepts pre-escaped strings too)
   const bulletList = (arr = []) =>
@@ -196,10 +196,10 @@ function buildResumeHtml(data) {
 
   // Contact bar items (only non-empty)
   const contacts = [
-    phone    && `<span><strong>&#128222;</strong> ${esc(phone)}</span>`,
-    email    && `<span><strong>&#9993;</strong> ${esc(email)}</span>`,
+    phone && `<span><strong>&#128222;</strong> ${esc(phone)}</span>`,
+    email && `<span><strong>&#9993;</strong> ${esc(email)}</span>`,
     linkedin && `<span><strong>LinkedIn:</strong> <a href="${esc(linkedin)}">${shortLinkedin(linkedin)}</a></span>`,
-    github   && `<span><strong>GitHub:</strong> <a href="${esc(github)}">${shortGithub(github)}</a></span>`,
+    github && `<span><strong>GitHub:</strong> <a href="${esc(github)}">${shortGithub(github)}</a></span>`,
   ].filter(Boolean).join('<span class="dot">&bull;</span>');
 
   // ── HTML Template ────────────────────────────────────────────────────────
@@ -359,8 +359,8 @@ async function generateResumePdf({
   selfDescription,
   userData,
 }) {
-  const name  = userData?.username || "Candidate Name";
-  const email = userData?.email    || "candidate@email.com";
+  const name = userData?.username || "Candidate Name";
+  const email = userData?.email || "candidate@email.com";
 
   const prompt = `You are a senior ATS Resume Writer and Technical Recruiter with 15+ years of experience.
 Your task: extract every detail from the candidate's resume, then rewrite and optimise the content to maximise ATS score and relevance for the target role.
@@ -462,7 +462,7 @@ Return ONLY valid JSON — no markdown fences, no commentary:
     });
 
     const resumeData = JSON.parse(completion.choices[0].message.content.trim());
-    const html       = buildResumeHtml(resumeData);
+    const html = buildResumeHtml(resumeData);
     return await generateHtmlToPdf(html);
 
   } catch (err) {
