@@ -1,9 +1,53 @@
 const Groq = require("groq-sdk");
-const puppeteer = require("puppeteer");
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
+
+// ── Serverless-safe browser launcher ─────────────────────────────────────────
+// Uses puppeteer-core + @sparticuz/chromium-min on Vercel (no bundled Chromium).
+// Falls back to local Chromium (puppeteer default) in development.
+async function launchBrowser() {
+  if (process.env.VERCEL || process.env.NODE_ENV === "production") {
+    // Dynamic ESM import — required because @sparticuz/chromium-min is ESM-only
+    const chromium = await import("@sparticuz/chromium-min");
+    const puppeteer = await import("puppeteer-core");
+
+    // Minimal Chromium downloaded at runtime from CDN (avoids 50 MB Vercel limit)
+    const CHROMIUM_URL =
+      "https://github.com/Sparticuz/chromium/releases/download/v131.0.1/chromium-v131.0.1-pack.tar";
+
+    const executablePath = await chromium.default.executablePath(CHROMIUM_URL);
+
+    return puppeteer.default.launch({
+      args: chromium.default.args,
+      defaultViewport: chromium.default.defaultViewport,
+      executablePath,
+      headless: chromium.default.headless,
+    });
+  }
+
+  // Local development — use the standard puppeteer package
+  const puppeteer = require("puppeteer");
+  return puppeteer.launch({
+    headless: "new",
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+}
+
+// Convert HTML string to PDF buffer via Puppeteer
+async function generateHtmlToPdf(html) {
+  const browser = await launchBrowser();
+  const page = await browser.newPage();
+  await page.setContent(html, { waitUntil: "networkidle0" });
+  const pdf = await page.pdf({
+    format: "A4",
+    printBackground: true,
+    margin: { top: "0", right: "0", bottom: "0", left: "0" },
+  });
+  await browser.close();
+  return pdf;
+}
 
 /**
  * generateInterviewReport
@@ -83,23 +127,6 @@ async function generateInterviewReport(jobDescription, resumeText, selfDescripti
     console.error("Error generating interview report:", err.message);
     throw err;
   }
-}
-
-// Convert HTML string to PDF buffer via Puppeteer
-async function generateHtmlToPdf(html) {
-  const browser = await puppeteer.launch({
-    headless: "new",
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
-  const page = await browser.newPage();
-  await page.setContent(html, { waitUntil: "networkidle0" });
-  const pdf = await page.pdf({
-    format: "A4",
-    printBackground: true,
-    margin: { top: "0", right: "0", bottom: "0", left: "0" },
-  });
-  await browser.close();
-  return pdf;
 }
 
 // Build a professional, ATS-optimised resume HTML from structured JSON

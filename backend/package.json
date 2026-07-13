@@ -30,5 +30,8 @@
     "puppeteer-core": "^25.3.0",
     "zod": "^4.4.3",
     "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "puppeteer": "^25.3.0"
   }
 }
