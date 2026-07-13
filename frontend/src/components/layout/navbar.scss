@@ -1,0 +1,100 @@
+/* ────────────────────────────────────────────────────────
+   navbar.scss
+   Desktop  : hamburger hidden, shows user name
+   Mobile   : hamburger visible, user name hidden
+──────────────────────────────────────────────────────── */
+
+.navbar {
+    height: 60px;
+    background: #0f0f1a;
+    border-bottom: 1px solid #1e1e2e;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    gap: 12px;
+}
+
+/* Page title */
+.navbar-title {
+    font-size: 17px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0;
+    flex: 1;              /* pushes user badge to the right */
+}
+
+/* ── Hamburger ────────────────────────────────────────── */
+
+.hamburger {
+    display: none;        /* hidden on desktop */
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.hamburger span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #9ca3af;
+    border-radius: 2px;
+    transition: background 0.2s;
+}
+
+.hamburger:hover span {
+    background: #ffffff;
+}
+
+/* ── User Badge ───────────────────────────────────────── */
+
+.user-badge {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.user-avatar {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: #7c3aed;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.user-name {
+    font-size: 14px;
+    color: #d1d5db;
+    font-weight: 500;
+}
+
+/* ── Mobile (max 768px) ───────────────────────────────── */
+@media (max-width: 768px) {
+
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: flex;
+    }
+
+    /* Hide the text username on small screens to save space */
+    .user-name {
+        display: none;
+    }
+}

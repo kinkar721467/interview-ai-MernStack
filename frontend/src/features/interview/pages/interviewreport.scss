@@ -1,0 +1,572 @@
+// interviewreport.scss — Matches InterviewReport JSX exactly
+
+// ── Page Shell ───────────────────────────────────────────────
+.report-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    padding: 0;
+}
+
+// ── Header ───────────────────────────────────────────────────
+.report-header {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+
+    .report-meta {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 14px;
+    }
+
+    .report-badge {
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        color: #a78bfa;
+        background: rgba(167, 139, 250, 0.12);
+        border: 1px solid rgba(167, 139, 250, 0.3);
+        padding: 4px 12px;
+        border-radius: 20px;
+    }
+
+    .report-date {
+        font-size: 0.8rem;
+        color: #6b7280;
+    }
+
+    .report-title {
+        font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+        font-weight: 800;
+        color: #fff;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
+        margin-bottom: 8px;
+
+        .accent {
+            background: linear-gradient(135deg, #a78bfa, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    }
+
+    .report-job {
+        font-size: 0.95rem;
+        color: #9ca3af;
+        font-weight: 500;
+        line-height: 1.5;
+    }
+}
+
+// ── Score Hero ───────────────────────────────────────────────
+.score-hero {
+    width: 100%;
+    max-width: 800px;
+    background: #111123;
+    border: 1px solid #1e1e2e;
+    border-radius: 20px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+
+    .score-hero-ring {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        flex-wrap: wrap;
+
+        .score-hero-text {
+            flex: 1;
+            min-width: 180px;
+
+            h2 {
+                font-size: 1rem;
+                font-weight: 700;
+                color: #e5e7eb;
+                margin-bottom: 6px;
+            }
+
+            p {
+                font-size: 0.88rem;
+                color: #6b7280;
+                line-height: 1.6;
+            }
+        }
+    }
+}
+
+// ── Quick Stats ──────────────────────────────────────────────
+.quick-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+
+    @media (max-width: 540px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-pill {
+        background: #0f0f1a;
+        border: 1px solid #1e1e2e;
+        border-radius: 14px;
+        padding: 14px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: border-color 0.2s;
+
+        &:hover {
+            border-color: #7c3aed;
+        }
+
+        .stat-num {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #a78bfa;
+            line-height: 1;
+        }
+
+        .stat-name {
+            font-size: 0.7rem;
+            color: #6b7280;
+            text-align: center;
+            font-weight: 500;
+        }
+    }
+}
+
+// ── Tabs ─────────────────────────────────────────────────────
+.report-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    background: #111123;
+    border: 1px solid #1e1e2e;
+    border-radius: 50px;
+    padding: 5px;
+    width: fit-content;
+    max-width: 100%;
+
+    .tab-btn {
+        padding: 8px 20px;
+        border: none;
+        background: transparent;
+        color: #6b7280;
+        font-size: 0.83rem;
+        font-weight: 600;
+        border-radius: 50px;
+        cursor: pointer;
+        font-family: inherit;
+        white-space: nowrap;
+        transition: all 0.2s;
+
+        &:hover:not(.active) {
+            color: #d1d5db;
+            background: #1e1e2e;
+        }
+
+        &.active {
+            background: linear-gradient(135deg, #7c3aed, #5b21b6);
+            color: #fff;
+            box-shadow: 0 2px 14px rgba(124, 58, 237, 0.45);
+        }
+    }
+}
+
+// ── Tab Content ───────────────────────────────────────────────
+.tab-content {
+    width: 100%;
+    max-width: 800px;
+}
+
+.tab-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.panel-hint {
+    font-size: 0.82rem;
+    color: #4b5563;
+    margin-bottom: 4px;
+}
+
+.fade-in {
+    animation: fadeIn 0.22s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+// ── Question List ─────────────────────────────────────────────
+.q-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+// ── Question Card ─────────────────────────────────────────────
+.q-card {
+    background: #111123;
+    border: 1px solid #1e1e2e;
+    border-radius: 16px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+
+    &:hover {
+        border-color: #3730a3;
+    }
+
+    &.expanded {
+        border-color: #5b21b6;
+        box-shadow: 0 4px 24px rgba(124, 58, 237, 0.15);
+    }
+
+    // Top row — Q badge, question text, chevron
+    .q-card-top {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 18px;
+    }
+
+    // Colored "Q" or "B" badge
+    .q-label {
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        background: rgba(124, 58, 237, 0.2);
+        color: #a78bfa;
+        font-size: 0.8rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        border: 1px solid rgba(124, 58, 237, 0.3);
+
+        // Behavioral badge — different color
+        &.beh {
+            background: rgba(59, 130, 246, 0.18);
+            color: #93c5fd;
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+    }
+
+    // Question text
+    .q-text {
+        flex: 1;
+        font-size: 0.92rem;
+        color: #e5e7eb;
+        line-height: 1.55;
+        font-weight: 500;
+        padding-top: 5px;
+    }
+
+    // Up/down arrow
+    .q-chevron {
+        font-size: 0.6rem;
+        color: #4b5563;
+        padding-top: 7px;
+        flex-shrink: 0;
+        transition: color 0.2s;
+    }
+
+    &.expanded .q-chevron {
+        color: #a78bfa;
+    }
+
+    // Expanded body
+    .q-card-body {
+        border-top: 1px solid #1e1e2e;
+        padding: 16px 18px 18px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+
+        // Ideal answer text
+        .q-answer {
+            font-size: 0.88rem;
+            color: #9ca3af;
+            line-height: 1.7;
+            padding: 12px 14px;
+            background: rgba(124, 58, 237, 0.06);
+            border-left: 3px solid #7c3aed;
+            border-radius: 0 8px 8px 0;
+        }
+    }
+}
+
+// ── Key Points list ───────────────────────────────────────────
+.key-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    li {
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        font-size: 0.85rem;
+        color: #9ca3af;
+        line-height: 1.5;
+
+        .kp-dot {
+            width: 6px;
+            height: 6px;
+            background: #7c3aed;
+            border-radius: 50%;
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+    }
+}
+
+// ── STAR Grid (behavioral) ────────────────────────────────────
+.star-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    @media (max-width: 540px) {
+        grid-template-columns: 1fr;
+    }
+
+    .star-item {
+        background: #0f0f1a;
+        border: 1px solid #1e1e2e;
+        border-radius: 12px;
+        padding: 14px;
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+
+        // S / T / A / R letter
+        .star-letter {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(59, 130, 246, 0.18);
+            color: #93c5fd;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            font-size: 0.78rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        div {
+            flex: 1;
+
+            strong {
+                display: block;
+                font-size: 0.72rem;
+                font-weight: 700;
+                color: #6b7280;
+                text-transform: uppercase;
+                letter-spacing: 0.6px;
+                margin-bottom: 4px;
+            }
+
+            p {
+                font-size: 0.83rem;
+                color: #9ca3af;
+                line-height: 1.5;
+            }
+        }
+    }
+}
+
+// ── Skill Gaps ────────────────────────────────────────────────
+.gaps-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.gap-card {
+    display: flex;
+    align-items: stretch;
+    background: #111123;
+    border: 1px solid #1e1e2e;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: #2a2a4a;
+    }
+
+    .gap-severity-bar {
+        width: 4px;
+        flex-shrink: 0;
+    }
+
+    .gap-body {
+        flex: 1;
+        padding: 16px 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+
+        .gap-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+
+            .gap-skill {
+                font-size: 0.95rem;
+                font-weight: 700;
+                color: #e5e7eb;
+            }
+
+            .gap-severity-badge {
+                font-size: 0.68rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                padding: 3px 10px;
+                border-radius: 20px;
+                border: 1px solid;
+                flex-shrink: 0;
+            }
+        }
+
+        .gap-desc {
+            font-size: 0.87rem;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+    }
+}
+
+// ── Preparation Plan ─────────────────────────────────────────
+.plan-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.plan-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: #111123;
+    border: 1px solid #1e1e2e;
+    border-radius: 16px;
+    padding: 18px;
+    transition: border-color 0.2s;
+
+    &:hover {
+        border-color: #2a2a4a;
+    }
+
+    .step-number {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #7c3aed, #5b21b6);
+        color: #fff;
+        font-size: 0.9rem;
+        font-weight: 800;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        box-shadow: 0 2px 12px rgba(124, 58, 237, 0.4);
+    }
+
+    .step-body {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .step-action {
+            font-size: 0.92rem;
+            color: #d1d5db;
+            line-height: 1.55;
+            font-weight: 500;
+        }
+
+        .step-resources {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+
+            .resource-chip {
+                font-size: 0.75rem;
+                color: #6b7280;
+                background: #0f0f1a;
+                border: 1px solid #1e1e2e;
+                padding: 4px 12px;
+                border-radius: 20px;
+                transition: border-color 0.2s, color 0.2s;
+
+                &:hover {
+                    border-color: #7c3aed;
+                    color: #a78bfa;
+                }
+            }
+        }
+    }
+}
+
+// ── Footer ───────────────────────────────────────────────────
+.report-footer {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 0 16px;
+
+    .footer-note {
+        font-size: 0.8rem;
+        color: #374151;
+    }
+}
+
+// ── Responsive ────────────────────────────────────────────────
+@media (max-width: 600px) {
+    .score-hero {
+        padding: 20px 16px;
+    }
+
+    .score-hero-ring {
+        flex-direction: column;
+    }
+
+    .report-tabs {
+        border-radius: 14px;
+
+        .tab-btn {
+            border-radius: 10px;
+            padding: 8px 12px;
+            font-size: 0.78rem;
+        }
+    }
+}

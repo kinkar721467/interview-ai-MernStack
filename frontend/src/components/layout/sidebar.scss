@@ -1,0 +1,191 @@
+/*
+   sidebar.scss
+   Desktop  : fixed on the left, always visible
+   Mobile   : slides in from the left, z-index above overlay
+*/
+
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #0f0f1a;
+    border-right: 1px solid #1e1e2e;
+    display: flex;
+    flex-direction: column;
+    padding: 24px 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+}
+
+/* ── Logo ── */
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 36px;
+    padding: 0 8px;
+}
+
+.logo-icon { font-size: 22px; color: #7c3aed; }
+
+.logo-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
+/* ── Nav Links ── */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.2s, color 0.2s;
+}
+
+.nav-item:hover  { background: #1e1e2e; color: #ffffff; }
+.nav-item.active { background: #1e1e2e; color: #a78bfa; font-weight: 600; }
+
+.nav-icon {
+    font-size: 18px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* AI PDF Generator nav item — purple accent */
+.nav-item--pdf {
+    margin-top: 4px;
+    border: 1px solid transparent;
+    background: rgba(124, 58, 237, 0.06);
+
+    &:hover {
+        background: rgba(124, 58, 237, 0.14);
+        border-color: rgba(124, 58, 237, 0.25);
+        color: #c4b5fd;
+    }
+
+    &.active {
+        background: rgba(124, 58, 237, 0.18);
+        border-color: rgba(124, 58, 237, 0.4);
+        color: #c4b5fd;
+
+        .nav-icon svg { stroke: #a78bfa; }
+    }
+
+    .nav-icon svg { stroke: #7c3aed; transition: stroke 0.2s; }
+}
+
+/* ── Interview History ── */
+
+.sidebar-history {
+    flex: 1;
+    overflow-y: auto;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid #1e1e2e;
+}
+
+.sidebar-history::-webkit-scrollbar       { width: 4px; }
+.sidebar-history::-webkit-scrollbar-thumb { background: #2a2a3e; border-radius: 4px; }
+
+.history-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    padding: 0 8px;
+    margin-bottom: 8px;
+}
+
+.history-empty {
+    font-size: 12px;
+    color: #4b5563;
+    padding: 4px 8px;
+}
+
+.history-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 4px;
+    transition: background 0.2s;
+}
+
+.history-item:hover  { background: #1e1e2e; }
+.history-item.active { background: #1e1e2e; }
+
+.history-title {
+    font-size: 12px;
+    color: #9ca3af;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.history-item.active .history-title { color: #a78bfa; }
+
+.history-score {
+    font-size: 11px;
+    font-weight: 600;
+    color: #7c3aed;
+    background: rgba(124, 58, 237, 0.12);
+    padding: 2px 6px;
+    border-radius: 20px;
+    flex-shrink: 0;
+}
+
+/* ── Bottom Logout ── */
+
+.sidebar-bottom {
+    border-top: 1px solid #1e1e2e;
+    padding-top: 16px;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: none;
+    background: transparent;
+    color: #9ca3af;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+
+.logout-btn:hover { background: #2d1f1f; color: #f87171; }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+    .sidebar--open { transform: translateX(0); }
+}

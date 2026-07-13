@@ -1,0 +1,472 @@
+// home.scss — Interview Home Page Styles
+
+// ── Error Banner ─────────────────────────────────────────────
+.error-banner {
+    width: 100%;
+    max-width: 980px;
+    background: rgba(232, 58, 127, 0.08);
+    border: 1px solid rgba(232, 58, 127, 0.3);
+    border-radius: 12px;
+    padding: 12px 18px;
+    font-size: 0.87rem;
+    color: #e83a7f;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    gap: 32px;
+}
+
+// ── Header ──────────────────────────────────────────────────
+.home-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    max-width: 640px;
+
+    .home-title {
+        font-size: clamp(1.8rem, 4vw, 2.6rem);
+        font-weight: 800;
+        color: #ffffff;
+        letter-spacing: -0.5px;
+        line-height: 1.2;
+
+        .accent {
+            color: #e83a7f;
+            background: linear-gradient(135deg, #e83a7f, #ff6b6b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    }
+
+    .home-subtitle {
+        font-size: 0.95rem;
+        color: #999;
+        line-height: 1.6;
+        max-width: 500px;
+    }
+
+    .header-sparkle {
+        font-size: 1rem;
+        color: #e83a7f;
+        animation: pulse 2s ease-in-out infinite;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%       { opacity: 0.5; transform: scale(1.2); }
+}
+
+// ── Form Card ────────────────────────────────────────────────
+.form-card {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    gap: 0;
+    background: #181818;
+    border: 1px solid #2a2a2a;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 8px 48px rgba(0, 0, 0, 0.5);
+}
+
+// ── Panel Divider ────────────────────────────────────────────
+.panel-divider {
+    width: 1px;
+    background: #2a2a2a;
+    flex-shrink: 0;
+}
+
+// ── Panel Common ─────────────────────────────────────────────
+.panel {
+    flex: 1;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.panel-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+
+    .panel-icon {
+        font-size: 1.1rem;
+    }
+
+    .panel-title {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #f0f0f0;
+        flex: 1;
+    }
+}
+
+// ── Badges ───────────────────────────────────────────────────
+.badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+
+    &.badge-required {
+        background: rgba(232, 58, 127, 0.15);
+        color: #e83a7f;
+        border: 1px solid rgba(232, 58, 127, 0.35);
+    }
+
+    &.badge-recommended {
+        background: rgba(99, 212, 113, 0.12);
+        color: #63d471;
+        border: 1px solid rgba(99, 212, 113, 0.3);
+        margin-left: 8px;
+        font-size: 0.6rem;
+    }
+}
+
+// ── JD Textarea ──────────────────────────────────────────────
+.jd-textarea {
+    flex: 1;
+    min-height: 340px;
+    width: 100%;
+    background: #212121;
+    border: 1px solid #2e2e2e;
+    border-radius: 12px;
+    color: #ccc;
+    font-family: inherit;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    padding: 16px;
+    resize: none;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder {
+        color: #555;
+    }
+
+    &:focus {
+        border-color: #e83a7f;
+        box-shadow: 0 0 0 3px rgba(232, 58, 127, 0.1);
+    }
+}
+
+.char-count {
+    text-align: right;
+    font-size: 0.78rem;
+    color: #555;
+
+    .near-limit {
+        color: #ff8c42;
+    }
+}
+
+// ── Upload Section ───────────────────────────────────────────
+.upload-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.upload-label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #ccc;
+    display: flex;
+    align-items: center;
+}
+
+.drop-zone {
+    border: 2px dashed #303030;
+    border-radius: 14px;
+    padding: 32px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #1e1e1e;
+    min-height: 140px;
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 0%, rgba(232, 58, 127, 0.04), transparent 70%);
+        pointer-events: none;
+    }
+
+    &:hover {
+        border-color: #e83a7f;
+        background: #222;
+        box-shadow: 0 0 20px rgba(232, 58, 127, 0.08);
+    }
+
+    &.dragging {
+        border-color: #e83a7f;
+        background: rgba(232, 58, 127, 0.05);
+        box-shadow: 0 0 24px rgba(232, 58, 127, 0.15);
+    }
+
+    &.has-file {
+        border-color: #63d471;
+        background: rgba(99, 212, 113, 0.04);
+    }
+
+    .drop-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 4px;
+
+        &.upload-icon {
+            background: rgba(232, 58, 127, 0.15);
+            color: #e83a7f;
+        }
+
+        &.success-icon {
+            background: rgba(99, 212, 113, 0.15);
+            color: #63d471;
+        }
+    }
+
+    .drop-primary {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #ddd;
+        text-align: center;
+    }
+
+    .drop-secondary {
+        font-size: 0.78rem;
+        color: #555;
+    }
+}
+
+// ── OR Divider ───────────────────────────────────────────────
+.or-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #444;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    &::before,
+    &::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: #2a2a2a;
+    }
+
+    span {
+        color: #555;
+        font-weight: 600;
+    }
+}
+
+// ── Self Description ─────────────────────────────────────────
+.self-desc-section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.self-desc-textarea {
+    width: 100%;
+    min-height: 100px;
+    background: #212121;
+    border: 1px solid #2e2e2e;
+    border-radius: 12px;
+    color: #ccc;
+    font-family: inherit;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    padding: 14px 16px;
+    resize: vertical;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &::placeholder {
+        color: #555;
+    }
+
+    &:focus {
+        border-color: #e83a7f;
+        box-shadow: 0 0 0 3px rgba(232, 58, 127, 0.1);
+    }
+}
+
+// ── Info Banner ──────────────────────────────────────────────
+.info-banner {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    background: rgba(59, 130, 246, 0.08);
+    border: 1px solid rgba(59, 130, 246, 0.25);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: auto;
+
+    .info-icon {
+        color: #60a5fa;
+        font-weight: 700;
+        font-size: 0.85rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        color: #aaa;
+        line-height: 1.5;
+
+        strong {
+            color: #ddd;
+        }
+    }
+}
+
+// ── Footer ───────────────────────────────────────────────────
+.form-footer {
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+
+    .footer-note {
+        font-size: 0.8rem;
+        color: #555;
+    }
+}
+
+.generate-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #e83a7f, #c4285d);
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.2px;
+    font-family: inherit;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+    box-shadow: 0 4px 24px rgba(232, 58, 127, 0.35);
+
+    &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 32px rgba(232, 58, 127, 0.5);
+    }
+
+    &:active:not(:disabled) {
+        transform: scale(0.98);
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+        box-shadow: none;
+    }
+
+    &.loading {
+        opacity: 0.8;
+        cursor: wait;
+    }
+
+    .btn-sparkle {
+        font-size: 0.9rem;
+        animation: spin 4s linear infinite;
+    }
+
+    .btn-spinner {
+        width: 16px;
+        height: 16px;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        flex-shrink: 0;
+    }
+}
+
+// Remove file button inside drop zone
+.remove-file-btn {
+    background: rgba(232, 58, 127, 0.12);
+    border: 1px solid rgba(232, 58, 127, 0.3);
+    color: #e83a7f;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    margin-top: 4px;
+
+    &:hover {
+        background: rgba(232, 58, 127, 0.2);
+    }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+// ── Responsive ───────────────────────────────────────────────
+@media (max-width: 720px) {
+    .form-card {
+        flex-direction: column;
+    }
+
+    .panel-divider {
+        width: 100%;
+        height: 1px;
+    }
+
+    .jd-textarea {
+        min-height: 200px;
+    }
+
+    .form-footer {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+    }
+
+    .generate-btn {
+        justify-content: center;
+    }
+}
