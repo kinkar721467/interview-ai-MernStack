@@ -14,6 +14,7 @@ export const AuthProvider = ({children}) => {
                 setuser(data.user)
             } catch (err) {
                 console.log(err)
+                localStorage.removeItem('token')
             } finally {
                 setloading(false)
             }

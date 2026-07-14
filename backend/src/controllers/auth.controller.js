@@ -60,6 +60,7 @@ async function authRegisterController(req,res) {
 
     res.status(201).json({
         message: "User register sucessfully",
+        token: token,
         user: {
             id: newUser._id,
             username: newUser.username,
@@ -120,6 +121,7 @@ async function authLoginController(req,res) {
 
     res.status(200).json({
         message: "User login sucessfully",
+        token: token,
         user: {
             id: user._id,
             username: user.username,
